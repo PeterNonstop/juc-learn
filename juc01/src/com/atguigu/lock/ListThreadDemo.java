@@ -9,9 +9,8 @@ package com.atguigu.lock;
  * @description TODO
  */
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -61,6 +60,25 @@ class UnsafeThead {
             }, String.valueOf(i)).start();
         }
     }
+
+    public void listHashMap() {
+        // HashMap
+        // HashMap<String, String> map = new HashMap<>();
+
+        // 解决方案：ConcurrentHashMap
+        Map<String, String> map = new ConcurrentHashMap<>();
+
+        for (int i = 0; i < 30; i++) {
+            String key = String.valueOf(i);
+            new Thread(() -> {
+                // 向集合中添加内容
+                map.put(key, UUID.randomUUID().toString().substring(0, 8));
+
+                // 向集合中获取内容
+                System.out.println(map);
+            }, String.valueOf(i)).start();
+        }
+    }
 }
 
 /**
@@ -72,7 +90,9 @@ public class ListThreadDemo {
         UnsafeThead unsafeThead = new UnsafeThead();
         //unsafeThead.listUnsafe();
 
-        unsafeThead.listHashSet();
+        //unsafeThead.listHashSet();
+
+        unsafeThead.listHashMap();
     }
 
 
