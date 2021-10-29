@@ -62,7 +62,7 @@ class UnsafeThead {
     }
 
     public void listHashMap() {
-        // HashMap
+        // HashMap不安全
         // HashMap<String, String> map = new HashMap<>();
 
         // 解决方案：ConcurrentHashMap

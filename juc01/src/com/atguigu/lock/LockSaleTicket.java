@@ -17,8 +17,11 @@ import java.util.concurrent.locks.ReentrantLock;
 class LockTicket {
     private int number = 30;
 
-    // 创建可重入锁
-    private final ReentrantLock lock = new ReentrantLock();
+    /**
+     * 创建可重入锁
+     * 公平锁与非公平锁
+     */
+    private final ReentrantLock lock = new ReentrantLock(true);
 
     public void sale() {
         lock.lock();
